@@ -8,11 +8,10 @@ function mysql_cmd() {
 
 function userExists() {
     result=$(mysql_cmd "SELECT count(User) FROM mysql.user WHERE User='${APPDB_LOGIN}'")
+    echo result
 }
 
-status=$(userExists)
-
-if [ $status -eq 1 ]; then
+if [ $(userExists) == "1" ]; then
     mysql_cmd "ALTER USER '${APPDB_LOGIN}'@'%' IDENTIFIED BY '${APPDB_PASS}'"
     mysql_cmd "FLUSH PRIVILEGES"
 else
