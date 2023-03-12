@@ -8,7 +8,7 @@ function mysql_cmd() {
 
 function userExists() {
     result=$(mysql_cmd "SELECT count(User) FROM mysql.user WHERE User='${APPDB_LOGIN}'")
-    echo result
+    echo $result
 }
 
 if [ $(userExists) == "1" ]; then
